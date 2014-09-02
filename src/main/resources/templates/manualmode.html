@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="template/master :: master">
+<title th:fragment="title">Ledino -- Manual mode</title>
+<div th:fragment="content">
+<script src="/js/ledino-manual-mode.js"/>
+	<script>
+		var config = {
+			pageName : "manual-mode"
+		}
+	</script>
+	<input type="text" ng-model="yourName" placeholder="Enter a name here"/>
+	<hr/>
+	<h1>Hello {{yourName}}!</h1>
+</div>
+</html>

@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.logo {
+	
+}
+.logo span.red{
+	color:#ff5959
+}
+.logo span.green{
+	color:#03e747;
+}
+.logo span.blue{
+	color:#5e9aff;
+}

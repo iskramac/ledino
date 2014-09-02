@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="master" ng-app="ledino">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title th:replace=":: title"></title>
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Custom styles for this template -->
+<link href="/css/cover.css" rel="stylesheet" />
+<link href="/css/ledino.css" rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
+	
+</head>
+
+
+<body>
+	<div class="site-wrapper">
+		<div class="site-wrapper-inner">
+			<div class="cover-container">
+				<div class="masthead clearfix" th:fragment="header">
+					<div class="inner">
+						<h3 class="masthead-brand logo">
+							<span class="red">Le</span><span class="green">di</span><span
+								class="blue">no</span>
+						</h3>
+						<ul th:replace="template/menu :: menu">
+						</ul>
+					</div>
+				</div>
+				<div class="inner cover" th:replace="::content"></div>
+				<div class="mastfoot">
+					<div class="inner">
+						<p>
+							Created by <a href="http://jeefix.com">jeefix</a>.
+						</p>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+</body>
+</html>
