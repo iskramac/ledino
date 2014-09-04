@@ -1,0 +1,10 @@
+<div ng-controller="dashboardController">
+	Search: <input type="text" ng-model="query" class="form-control" placeholder="Enter search query" />
+	<h1>
+		Total number of phones :{{phones.length}}<span ng-show="query">, without query '{{query}}'</span>
+	</h1>
+	<ul>
+		<li ng-repeat="phone in phones | filter:query">{{phone.name}}-{{phone.snippet}}</li>
+	</ul>
+
+</div>

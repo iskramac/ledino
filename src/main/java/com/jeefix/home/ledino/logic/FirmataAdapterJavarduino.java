@@ -3,8 +3,6 @@ package com.jeefix.home.ledino.logic;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import name.antonsmirnov.firmata.message.SetPinModeMessage;
-
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -22,14 +20,14 @@ public class FirmataAdapterJavarduino extends FirmataAdapter {
 
   @PostConstruct
   public void init() {
-    if(isUseMock()){
+    if (isUseMock()) {
       log.info("Omitting initialization as 'useMock' flag is set to 'true'");
       return;
     }
     try {
       log.info(String.format("Attempting to connect to arduino at port '%s' with baudrate '%s'",
           getArduinoPortName(), getArduinoBaudrate()));
-      
+
       javarduino = new Arduino(getArduinoPortName(), getArduinoBaudrate());
       log.info("Successfuly connected to arduino");
     } catch (Exception e) {

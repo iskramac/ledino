@@ -1,0 +1,24 @@
+<form ng-controller="manualModeController" class="form-inline" role="form">
+
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon">Red</div>
+			<select class="form-control" ng-model="color.red">
+				<option ng-repeat="range in colorRange">{{range}}</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<div class="input-group-addon">Green</div>
+			<select class="form-control" ng-model="color.green">
+				<option ng-repeat="range in colorRange">{{range}}</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<div class="input-group-addon">Blue</div>
+			<select class="form-control" ng-model="color.blue">
+				<option ng-repeat="range in colorRange">{{range}}</option>
+			</select>
+		</div>
+	</div>
+	Current arduino state: |{{color.rgb()}}|
+</form>

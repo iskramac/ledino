@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" th:fragment="master" ng-app="ledino">
+<html lang="en" th:fragment="master" ng-app="ledinoApp" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,21 +8,21 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 
-<title th:replace=":: title"></title>
+<title></title>
 
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap.min.css" rel="stylesheet" />
 <!-- Custom styles for this template -->
 <link href="/css/cover.css" rel="stylesheet" />
 <link href="/css/ledino.css" rel="stylesheet" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
-	
-</head>
+<script src="/js/lib/jquery.min.js"></script>
+<script src="/js/lib/bootstrap.min.js"></script>
+<script src="/js/lib/angular.min.js"></script>
+<script src="/js/lib/angular-route.js"></script>
 
+<script src="/js/ledino-config.js"></script>
+<script src="/js/ledino-controllers.js"></script>
+</head>
 
 <body>
 	<div class="site-wrapper">
@@ -29,15 +30,15 @@
 			<div class="cover-container">
 				<div class="masthead clearfix" th:fragment="header">
 					<div class="inner">
-						<h3 class="masthead-brand logo">
-							<span class="red">Le</span><span class="green">di</span><span
-								class="blue">no</span>
-						</h3>
-						<ul th:replace="template/menu :: menu">
+						<a href="/"><img src="/img/logo-small.png" alt="ledino" /></a>
+						
+						<!-- MENU -->
+						<ul class="nav masthead-nav" th:fragment="menu" ng-controller="menuController">
+							<li ng-repeat="page in pages"><a href="{{page.url}}">{{page.name}}</a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="inner cover" th:replace="::content"></div>
+				<div class="inner cover" ng-view></div>
 				<div class="mastfoot">
 					<div class="inner">
 						<p>
@@ -45,13 +46,8 @@
 						</p>
 					</div>
 				</div>
-
 			</div>
-
 		</div>
-
 	</div>
-
-
 </body>
 </html>

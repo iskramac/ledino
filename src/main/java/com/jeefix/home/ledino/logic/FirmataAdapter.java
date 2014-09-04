@@ -1,12 +1,6 @@
 package com.jeefix.home.ledino.logic;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 import org.springframework.beans.factory.annotation.Value;
-
-import name.antonsmirnov.firmata.Firmata;
-import name.antonsmirnov.firmata.message.AnalogMessage;
 
 import com.jeefix.home.ledino.common.enums.LedColor;
 import com.jeefix.home.ledino.common.exception.LedinoRuntimeException;

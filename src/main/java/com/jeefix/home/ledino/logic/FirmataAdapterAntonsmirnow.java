@@ -11,13 +11,11 @@ import name.antonsmirnov.firmata.serial.IndepProcessingSerialAdapter;
 import name.antonsmirnov.firmata.serial.SerialException;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import processing.serial.IndepProcessingSerial;
 
-import com.jeefix.home.ledino.common.enums.LedColor;
 import com.jeefix.home.ledino.common.exception.FirmataInitalizationException;
 import com.jeefix.home.ledino.common.exception.LedinoRuntimeException;
 
@@ -27,8 +25,6 @@ public class FirmataAdapterAntonsmirnow extends FirmataAdapter {
 
   private static final Logger log = Logger.getLogger(FirmataAdapterAntonsmirnow.class);
   private Firmata firmata;
-
-
 
   @PostConstruct
   public void init() {

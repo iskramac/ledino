@@ -6,18 +6,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class DashboardController {
-  private static final Logger log = Logger.getLogger(DashboardController.class);
+public class BootstrapController {
+  private static final Logger log = Logger.getLogger(BootstrapController.class);
 
   @RequestMapping("/")
   public String redirectToDashboard() {
-    
+
     return "redirect:/web/";
   }
-  
+
   @RequestMapping("/web/")
-  public String loadDashboard( Model model) {
-    log.info("Loading dashbord");
-    return "dashboard";
+  public String loadDashboard(Model model) {
+    log.info("Loading page...");
+    return "html/template";
   }
 }
