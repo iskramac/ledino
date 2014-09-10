@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" th:fragment="master" ng-app="ledinoApp" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org" ng-controller="pageController">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,30 +8,42 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 
-<title></title>
+<title ng-bind="title"></title>
 
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap.min.css" rel="stylesheet" />
 <!-- Custom styles for this template -->
 <link href="/css/cover.css" rel="stylesheet" />
 <link href="/css/ledino.css" rel="stylesheet" />
+<link href="/css/colorpicker.css" rel="stylesheet" />
+<link href="/css/spectrum.min.css" rel="stylesheet" />
+
+
+
 <script src="/js/lib/jquery.min.js"></script>
 <script src="/js/lib/bootstrap.min.js"></script>
 <script src="/js/lib/angular.min.js"></script>
 <script src="/js/lib/angular-route.js"></script>
+<script src="/js/lib/angular-resource.js"></script>
+<script src="/js/lib/bootstrap-colorpicker-module.js"></script>
+<script src="/js/lib/spectrum.js"></script>
+
+<script src="/js/lib/spectrumColorpicker.directive.js"></script>
 
 <script src="/js/ledino-config.js"></script>
 <script src="/js/ledino-controllers.js"></script>
+<script src="/js/ledino-services.js"></script>
+
 </head>
 
 <body>
 	<div class="site-wrapper">
 		<div class="site-wrapper-inner">
 			<div class="cover-container">
-				<div class="masthead clearfix" th:fragment="header">
+				<div class="masthead clearfix">
 					<div class="inner">
 						<a href="/"><img src="/img/logo-small.png" alt="ledino" /></a>
-						
+
 						<!-- MENU -->
 						<ul class="nav masthead-nav" th:fragment="menu" ng-controller="menuController">
 							<li ng-repeat="page in pages"><a href="{{page.url}}">{{page.name}}</a></li>

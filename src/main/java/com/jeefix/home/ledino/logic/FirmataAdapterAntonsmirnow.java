@@ -34,20 +34,18 @@ public class FirmataAdapterAntonsmirnow extends FirmataAdapter {
     try {
 
       ISerial serial =
-          new IndepProcessingSerialAdapter(new IndepProcessingSerial(getArduinoPortName(),
-              getArduinoBaudrate()));
+          new IndepProcessingSerialAdapter(new IndepProcessingSerial(getArduinoPortName(), getArduinoBaudrate()));
       firmata = new Firmata(serial);
       serial.start();
       log.info("Successfuly connected to arduino");
-      firmata.send(new SetPinModeMessage(LED_PIN_RED, SetPinModeMessage.PIN_MODE.PWM.getMode()));
-      firmata.send(new SetPinModeMessage(LED_PIN_GREEN, SetPinModeMessage.PIN_MODE.PWM.getMode()));
-      firmata.send(new SetPinModeMessage(LED_PIN_BLUE, SetPinModeMessage.PIN_MODE.PWM.getMode()));
+      firmata.send(new SetPinModeMessage(getRedPinValue(), SetPinModeMessage.PIN_MODE.PWM.getMode()));
+      firmata.send(new SetPinModeMessage(getGreenPinValue(), SetPinModeMessage.PIN_MODE.PWM.getMode()));
+      firmata.send(new SetPinModeMessage(getBluePinValue(), SetPinModeMessage.PIN_MODE.PWM.getMode()));
       log.info(String.format("Successfuly initialized RGB pins on PWM mode"));
     } catch (Exception e) {
       throw new FirmataInitalizationException("Unable to connect to arduino", e);
     }
   }
-
 
   @PreDestroy
   public void destroy() {
@@ -58,22 +56,17 @@ public class FirmataAdapterAntonsmirnow extends FirmataAdapter {
     }
   }
 
-
   @Override
   protected void setPwmLevel(int pinNumber, int level) throws Exception {
     firmata.send(new AnalogMessage(pinNumber, level));
   }
 
-
-
   public Firmata getFirmata() {
     return firmata;
   }
 
-
   public void setFirmata(Firmata firmata) {
     this.firmata = firmata;
   }
-
 
 }

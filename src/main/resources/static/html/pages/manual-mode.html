@@ -1,24 +1,31 @@
-<form ng-controller="manualModeController" class="form-inline" role="form">
+<form ng-controller="manualModeController" class="form-horizontal" role="form">
 
-	<div class="form-group">
-		<div class="input-group">
-			<div class="input-group-addon">Red</div>
-			<select class="form-control" ng-model="color.red">
-				<option ng-repeat="range in colorRange">{{range}}</option>
-			</select>
+	<div class="row">
+		<div class="form-group">
+			<label class="col-sm-4 control-label">Current color</label>
+			<div class="col-sm-6">
+				<p class="form-control-static">Red: {{color.red}} Green: {{color.green}} Blue: {{color.blue}}</p>
+			</div>
 		</div>
-		<div class="input-group">
-			<div class="input-group-addon">Green</div>
-			<select class="form-control" ng-model="color.green">
-				<option ng-repeat="range in colorRange">{{range}}</option>
-			</select>
-		</div>
-		<div class="input-group">
-			<div class="input-group-addon">Blue</div>
-			<select class="form-control" ng-model="color.blue">
-				<option ng-repeat="range in colorRange">{{range}}</option>
-			</select>
+		<div class="form-group">
+			<label for="colorpicker" class="col-sm-4 control-label">Pick color</label>
+			<div class="col-sm-6">
+				<spectrum-colorpicker trigger-id="theTrigger" ng-model="colorpickerValue" id="colorpicker" ng-change="colorpickerChangeHandler()"
+					options="{
+					preferredFormat: 'rgb',
+					flat: true,
+					showInput: false,
+					showAlpha: false,
+					allowEmpty: false,
+					showButtons:false,
+					showPalette: true,
+					showSelectionPalette: false,
+					palette: [['red', 'green', 'blue'],
+								['white','black','gray'],
+								['DodgerBlue','DarkMagenta ','yellow']]
+				}" />
+			</div>
 		</div>
 	</div>
-	Current arduino state: |{{color.rgb()}}|
+	
 </form>

@@ -25,10 +25,13 @@ public class FirmataAdapterJavarduino extends FirmataAdapter {
       return;
     }
     try {
-      log.info(String.format("Attempting to connect to arduino at port '%s' with baudrate '%s'",
-          getArduinoPortName(), getArduinoBaudrate()));
+      log.info(String.format("Attempting to connect to arduino at port '%s' with baudrate '%s'", getArduinoPortName(),
+          getArduinoBaudrate()));
 
       javarduino = new Arduino(getArduinoPortName(), getArduinoBaudrate());
+      javarduino.pinMode(getGreenPinValue(), Arduino.PWM);
+      javarduino.pinMode(getRedPinValue(), Arduino.PWM);
+      javarduino.pinMode(getBluePinValue(), Arduino.PWM);
       log.info("Successfuly connected to arduino");
     } catch (Exception e) {
       throw new FirmataInitalizationException("Unable to connect to arduino", e);
@@ -45,7 +48,5 @@ public class FirmataAdapterJavarduino extends FirmataAdapter {
   public void destroy() {
     javarduino.dispose();
   }
-
-
 
 }

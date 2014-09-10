@@ -13,42 +13,93 @@ ledinoControllers.controller('menuController', function($scope) {
 	}, ];
 });
 
-ledinoControllers.controller('manualModeController', [
-		'$scope',
-		'$http',
-		function($scope, $http) {
-			$http.get('/arduino/state').success(function(data) {
-				$scope.state = data;
-				console.log(data);
+ledinoControllers.controller('pageController', [ '$scope', '$http',
+		'ManualModeService', 'ColorHelper', 'JQueryHelper',
+		function($scope, $http, ManualModeService, ColorHelper, JQueryHelper) {
+			ManualModeService.getState(function(data) {
+
+				var color = ColorHelper.jsonToRgb(data.ledLevelMap);
+				console.log("Initialized page, current color:" + color)
+				JQueryHelper.setPageColor(color);
 			});
-			$scope.colorRange = (function() {
-				var ranges = [];
-				for (i = 0; i < 255; i++) {
-					ranges[i] = i;
-				}
-				return ranges;
-			})();
-			$scope.color = {
-				'red' : 0,
-				'green' : 0,
-				'blue' : 0,
-				'rgb' : function() {
-					return 'rgb(' + $scope.color.red + ',' + $scope.color.green
-							+ ',' + $scope.color.blue + ')';
-				}
+		} ]);
+
+ledinoControllers.controller('manualModeController', [ '$scope', '$http',
+		'ManualModeService', 'ColorHelper', 'JQueryHelper',
+		function($scope, $http, ManualModeService, ColorHelper, JQueryHelper) {
+			ManualModeService.getState(function(data) {
+				$scope.state = data;
+				$scope.color = {};
+				$scope.color = data.ledLevelMap;
+				$scope.colorpickerValue = ColorHelper.jsonToRgb($scope.color);
+				JQueryHelper.setPageColor($scope.colorpickerValue)
+			});
+
+			$scope.colorpickerChangeHandler = function(e) {
+				JQueryHelper.setPageColor($scope.colorpickerValue)
+				$scope.color = ColorHelper.rgbToJson($scope.colorpickerValue)
+				$scope.sync()
 			}
 
+			$scope.sync = function() {
+				ManualModeService.setColors($scope.color, function(data) {
+					$scope.color = data.ledLevelMap;
+				});
+			}
 		} ]);
-ledinoControllers.controller('dashboardController', function($scope) {
-	$scope.phones = [ {
-		'name' : 'Nexus S',
-		'snippet' : 'Fast just got faster with Nexus S.'
-	}, {
-		'name' : 'Motorola XOOM™ with Wi-Fi',
-		'snippet' : 'The Next, Next Generation tablet.'
-	}, {
-		'name' : 'MOTOROLA XOOM™',
-		'snippet' : 'The Next, Next Generation tablet.'
-	} ];
-	$scope.pageName = "dashboard"
-});
+
+ledinoControllers.controller('dashboardController', [
+		'$scope',
+		'ManualModeService',
+		'ColorHelper',
+		'JQueryHelper',
+		function($scope, ManualModeService, ColorHelper, JQueryHelper) {
+			var intervalId = 0;
+			$scope.demoIsOn = false;
+			$scope.ledOff = function() {
+				var color = {
+					RED : 0,
+					GREEN : 0,
+					BLUE : 0
+				};
+				JQueryHelper.setPageColor(ColorHelper.jsonToRgb(color));
+				ManualModeService.setColors(color);
+			}
+			$scope.ledOn = function() {
+				var color = {
+					RED : 255,
+					GREEN : 255,
+					BLUE : 255
+				};
+				JQueryHelper.setPageColor(ColorHelper.jsonToRgb(color));
+				ManualModeService.setColors(color);
+			}
+			$scope.toogleDemo = function() {
+				if ($scope.demoIsOn == false) {
+					console.log("Starting demo");
+					var red = 0;
+					var green = 0;
+					var blue = 0;
+					this.intervalId = setInterval(
+							function() {
+								red = (red + 1) % 512
+								green = (green + 2) % 512;
+								blue = (blue + 3) % 512;
+								var color = {
+									RED : red < 256 ? red : 512 - red,
+									GREEN : green < 256 ? green : 512 - green,
+									BLUE : blue < 256 ? blue : 512 - blue,
+								};
+								JQueryHelper.setPageColor(ColorHelper
+										.jsonToRgb(color));
+								ManualModeService.setColors(color);
+							}, 200);
+				} else {
+					console.log("Stopping demo");
+					clearInterval(this.intervalId);
+				}
+
+				$scope.demoIsOn = !$scope.demoIsOn;
+
+			}
+		} ]);
