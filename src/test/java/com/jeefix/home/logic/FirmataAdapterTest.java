@@ -1,6 +1,6 @@
 package com.jeefix.home.logic;
 
-import com.jeefix.home.ledino.common.enums.LedColor;
+import com.jeefix.home.ledino.common.enums.LedChannel;
 import com.jeefix.home.ledino.logic.FirmataAdapter;
 import com.jeefix.home.ledino.logic.FirmataAdapterAntonsmirnow;
 import com.jeefix.home.ledino.logic.FirmataAdapterJavarduino;
@@ -18,17 +18,17 @@ public class FirmataAdapterTest {
     System.out.println("AAAA");
     adapter.init();
     System.out.println("STOP");
-    adapter.setLedLevel(LedColor.RED, 255);
+    adapter.setLedLevel(LedChannel.RED, 255);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.GREEN, 255);
+    adapter.setLedLevel(LedChannel.GREEN, 255);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.BLUE, 255);
+    adapter.setLedLevel(LedChannel.BLUE, 255);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.BLUE, 0);
+    adapter.setLedLevel(LedChannel.BLUE, 0);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.GREEN, 0);
+    adapter.setLedLevel(LedChannel.GREEN, 0);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.RED, 0);
+    adapter.setLedLevel(LedChannel.RED, 0);
 
   }
 }

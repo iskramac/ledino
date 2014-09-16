@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import com.jeefix.home.ledino.common.enums.LedColor;
+import com.jeefix.home.ledino.common.enums.LedChannel;
 import com.jeefix.home.ledino.logic.FirmataAdapter;
 import com.jeefix.home.ledino.logic.FirmataAdapterJavarduino;
 import com.shigeodayo.javarduino.Arduino;
@@ -23,16 +23,16 @@ public class LedinoConsoleDemo {
     adapter.setArduinoPortName(props.getProperty("arduino.port_name"));
     adapter.init();
     System.out.println("START");
-    adapter.setLedLevel(LedColor.RED, 255);
+    adapter.setLedLevel(LedChannel.RED, 255);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.GREEN, 255);
+    adapter.setLedLevel(LedChannel.GREEN, 255);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.BLUE, 255);
+    adapter.setLedLevel(LedChannel.BLUE, 255);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.BLUE, 0);
+    adapter.setLedLevel(LedChannel.BLUE, 0);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.GREEN, 0);
+    adapter.setLedLevel(LedChannel.GREEN, 0);
     Thread.sleep(300);
-    adapter.setLedLevel(LedColor.RED, 0);
+    adapter.setLedLevel(LedChannel.RED, 0);
   }
 }

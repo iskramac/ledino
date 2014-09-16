@@ -5,10 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @ComponentScan(basePackages = {"com.jeefix.home"})
 @EnableAutoConfiguration
+@EnableScheduling
 public class SpringBootConfiguration {
   private static final Logger log = Logger.getLogger(SpringBootConfiguration.class);
 

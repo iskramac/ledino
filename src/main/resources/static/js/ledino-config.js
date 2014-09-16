@@ -1,5 +1,4 @@
-var ledinoApp = angular.module('ledinoApp', [ 'ngRoute', 'ledinoControllers',
-		'ledinoServices', 'colorpicker.module', 'angularSpectrumColorpicker' ]);
+var ledinoApp = angular.module('ledinoApp', [ 'ngRoute', 'ledinoControllers', 'ledinoServices', 'colorpicker.module', 'angularSpectrumColorpicker' ]);
 
 ledinoApp.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/dashboard', {
@@ -15,8 +14,9 @@ ledinoApp.config([ '$routeProvider', function($routeProvider) {
 	});
 } ]);
 
-ledinoApp.run(['$location', '$rootScope', function($location, $rootScope) {
-    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.title = current.$$route.title;
-    });
-}]);
+ledinoApp.run([ '$location', '$rootScope', function($location, $rootScope) {
+	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+		$rootScope.title = current.$$route.title;
+	});
+
+} ]);

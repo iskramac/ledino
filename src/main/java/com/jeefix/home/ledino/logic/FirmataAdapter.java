@@ -1,12 +1,14 @@
 package com.jeefix.home.ledino.logic;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.jeefix.home.ledino.common.enums.LedColor;
+import com.jeefix.home.ledino.common.enums.LedChannel;
 import com.jeefix.home.ledino.common.exception.LedinoRuntimeException;
 
 public abstract class FirmataAdapter {
 
+  private static final Logger log = Logger.getLogger(FirmataAdapter.class);
   @Value("${arduino.pin.red}")
   private int redPinValue;
   @Value("${arduino.pin.green}")
@@ -29,19 +31,21 @@ public abstract class FirmataAdapter {
 
   public void destroy() {};
 
-  public void setLedLevel(LedColor color, int level) {
+  public void setLedLevel(LedChannel color, int level) {
     if (isUseMock()) {
+      log.info("Ledino is in MOCK mode, changes has not been applied");
       return;
     }
     int pinNumber = getLedPinNumber(color);
     try {
       setPwmLevel(pinNumber, level);
+      log.info(String.format("PWM pin '%s' has been set to '%s'", pinNumber, level));
     } catch (Exception e) {
       throw new LedinoRuntimeException(String.format("Unable to set '%s' led level to '%s'", color, level), e);
     }
   }
 
-  protected int getLedPinNumber(LedColor color) {
+  protected int getLedPinNumber(LedChannel color) {
     switch (color) {
       case BLUE:
         return bluePinValue;

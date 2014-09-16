@@ -46,7 +46,10 @@ public class FirmataAdapterJavarduino extends FirmataAdapter {
 
   @PreDestroy
   public void destroy() {
-    javarduino.dispose();
+    if (javarduino != null) {
+      javarduino.dispose();
+    }
+
   }
 
 }

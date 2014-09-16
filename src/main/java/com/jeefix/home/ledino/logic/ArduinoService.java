@@ -1,6 +1,5 @@
 package com.jeefix.home.ledino.logic;
 
-import java.util.HashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.PostConstruct;
@@ -12,8 +11,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.jeefix.home.ledino.common.enums.ArduinoMode;
-import com.jeefix.home.ledino.common.enums.LedColor;
+import com.jeefix.home.ledino.common.enums.LedChannel;
+import com.jeefix.home.ledino.common.helper.ColorHelper;
+import com.jeefix.home.ledino.common.helper.ObjectCloner;
 import com.jeefix.home.ledino.model.ArduinoState;
+import com.jeefix.home.ledino.model.LedColor;
 
 @Service
 @Scope("singleton")
@@ -31,27 +33,29 @@ public class ArduinoService {
   @PostConstruct
   public void init() {
     arduinoState = new ArduinoState();
-    arduinoState.setCurrentMode(ArduinoMode.MANUAL);
-    arduinoState.setLedLevelMap(new HashMap<LedColor, Integer>());
+    arduinoState.setArduinoMode(ArduinoMode.MANUAL);
+
     lock = new ReentrantLock();
-    for (LedColor color : LedColor.values()) {
-      arduinoState.getLedLevelMap().put(color, INITIAL_LED_LEVEL_VALUE);
-      firmataAdapter.setLedLevel(color, INITIAL_LED_LEVEL_VALUE);
-    }
+    arduinoState.setLedColor(new LedColor(INITIAL_LED_LEVEL_VALUE, INITIAL_LED_LEVEL_VALUE, INITIAL_LED_LEVEL_VALUE));
+    setLedLevel(arduinoState.getLedColor());
     log.info(String.format("Initialized service with default arduino state: %s", arduinoState));
   }
 
-  public void setLedLevel(LedColor color, int level) {
+  public void setLedLevel(LedColor color) {
     lock.lock();
     try {
-      arduinoState.getLedLevelMap().put(color, level);
-      firmataAdapter.setLedLevel(color, level);
+      for (LedChannel channel : LedChannel.values()) {
+        int channelLevel = ColorHelper.getChannelValue(color, channel);
+        firmataAdapter.setLedLevel(channel, channelLevel);
+        arduinoState.setLedColor(color);
+        log.debug(String.format("Changed channel '%s' level to '%d'", channel, channelLevel));
+      }
     } finally {
       lock.unlock();
     }
   }
 
   public ArduinoState getArduinoState() {
-    return arduinoState;
+    return ObjectCloner.deepCopy(arduinoState);
   }
 }

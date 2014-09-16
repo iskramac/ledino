@@ -1,6 +1,6 @@
 package com.jeefix.home.ledino.common.enums;
 
-public enum LedColor {
+public enum LedChannel {
 
   RED, GREEN, BLUE
 }

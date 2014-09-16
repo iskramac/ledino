@@ -1,32 +1,30 @@
 package com.jeefix.home.ledino.model;
 
-import java.util.HashMap;
+import java.io.Serializable;
 
 import com.jeefix.home.ledino.common.enums.ArduinoMode;
-import com.jeefix.home.ledino.common.enums.LedColor;
 
-public class ArduinoState {
+public class ArduinoState implements Serializable {
 
-  private ArduinoMode currentMode;
+  private static final long serialVersionUID = -438758483383986263L;
 
-  private HashMap<LedColor, Integer> ledLevelMap;
+  private ArduinoMode arduinoMode;
+  private LedColor ledColor;
 
-  public ArduinoMode getCurrentMode() {
-    return currentMode;
+  public ArduinoMode getArduinoMode() {
+    return arduinoMode;
   }
 
-  public void setCurrentMode(ArduinoMode currentMode) {
-    this.currentMode = currentMode;
+  public void setArduinoMode(ArduinoMode arduinoMode) {
+    this.arduinoMode = arduinoMode;
   }
 
-  public HashMap<LedColor, Integer> getLedLevelMap() {
-    return ledLevelMap;
+  public LedColor getLedColor() {
+    return ledColor;
   }
 
-  public void setLedLevelMap(HashMap<LedColor, Integer> ledLevelMap) {
-    this.ledLevelMap = ledLevelMap;
+  public void setLedColor(LedColor ledColor) {
+    this.ledColor = ledColor;
   }
-
-
 
 }

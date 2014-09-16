@@ -13,66 +13,51 @@ ledinoControllers.controller('menuController', function($scope) {
 	}, ];
 });
 
-ledinoControllers.controller('pageController', [ '$scope', '$http',
-		'ManualModeService', 'ColorHelper', 'JQueryHelper',
-		function($scope, $http, ManualModeService, ColorHelper, JQueryHelper) {
-			ManualModeService.getState(function(data) {
+ledinoControllers.controller('pageController', [ '$rootScope', 'RestService', '$http', 'ArduinoService', 'ColorConverterService', 'LayoutService',
+		'WebSocketService', 'config', function($rootScope, RestService, $http, ArduinoService, ColorConverterService, LayoutService, WebSocketService, config) {
 
-				var color = ColorHelper.jsonToRgb(data.ledLevelMap);
-				console.log("Initialized page, current color:" + color)
-				JQueryHelper.setPageColor(color);
+			LayoutService.setPageColor(config.arduinoState.ledColor);
+			ArduinoService.addStateChangeHandler(function(state) {
+				LayoutService.setPageColor(state.ledColor);
 			});
 		} ]);
 
-ledinoControllers.controller('manualModeController', [ '$scope', '$http',
-		'ManualModeService', 'ColorHelper', 'JQueryHelper',
-		function($scope, $http, ManualModeService, ColorHelper, JQueryHelper) {
-			ManualModeService.getState(function(data) {
-				$scope.state = data;
-				$scope.color = {};
-				$scope.color = data.ledLevelMap;
-				$scope.colorpickerValue = ColorHelper.jsonToRgb($scope.color);
-				JQueryHelper.setPageColor($scope.colorpickerValue)
-			});
+ledinoControllers.controller('manualModeController', [ '$scope', '$rootScope', '$http', 'ArduinoService', 'ColorConverterService', 'LayoutService',
+		'WebSocketService', 'config', function($scope, $rootScope, $http, ArduinoService, ColorConverterService, LayoutService, WebSocketService, config) {
+			$scope.init = function() {
+				$scope.colorpickerValue = ColorConverterService.jsonToRgb(config.arduinoState.ledColor);
+				console.log(config.arduinoState.ledColor)
+				console.log("Manual mode initialized");
+			};
 
 			$scope.colorpickerChangeHandler = function(e) {
-				JQueryHelper.setPageColor($scope.colorpickerValue)
-				$scope.color = ColorHelper.rgbToJson($scope.colorpickerValue)
-				$scope.sync()
+				WebSocketService.send("/ledino/set-led-state", JSON.stringify(ColorConverterService.rgbToJson($scope.colorpickerValue)));
 			}
-
-			$scope.sync = function() {
-				ManualModeService.setColors($scope.color, function(data) {
-					$scope.color = data.ledLevelMap;
-				});
-			}
+			$scope.init();
 		} ]);
 
-ledinoControllers.controller('dashboardController', [
-		'$scope',
-		'ManualModeService',
-		'ColorHelper',
-		'JQueryHelper',
-		function($scope, ManualModeService, ColorHelper, JQueryHelper) {
+ledinoControllers.controller('dashboardController', [ '$scope', 'ArduinoService', 'ColorConverterService', 'LayoutService',
+		function($scope, ArduinoService, ColorConverterService, LayoutService) {
+			$scope.init = function() {
+				console.log("Dashboard initialized");
+			}
 			var intervalId = 0;
 			$scope.demoIsOn = false;
 			$scope.ledOff = function() {
 				var color = {
-					RED : 0,
-					GREEN : 0,
-					BLUE : 0
+					red : 0,
+					green : 0,
+					blue : 0
 				};
-				JQueryHelper.setPageColor(ColorHelper.jsonToRgb(color));
-				ManualModeService.setColors(color);
+				ArduinoService.setColors(color);
 			}
 			$scope.ledOn = function() {
 				var color = {
-					RED : 255,
-					GREEN : 255,
-					BLUE : 255
+					red : 255,
+					green : 255,
+					blue : 255
 				};
-				JQueryHelper.setPageColor(ColorHelper.jsonToRgb(color));
-				ManualModeService.setColors(color);
+				ArduinoService.setColors(color);
 			}
 			$scope.toogleDemo = function() {
 				if ($scope.demoIsOn == false) {
@@ -80,20 +65,17 @@ ledinoControllers.controller('dashboardController', [
 					var red = 0;
 					var green = 0;
 					var blue = 0;
-					this.intervalId = setInterval(
-							function() {
-								red = (red + 1) % 512
-								green = (green + 2) % 512;
-								blue = (blue + 3) % 512;
-								var color = {
-									RED : red < 256 ? red : 512 - red,
-									GREEN : green < 256 ? green : 512 - green,
-									BLUE : blue < 256 ? blue : 512 - blue,
-								};
-								JQueryHelper.setPageColor(ColorHelper
-										.jsonToRgb(color));
-								ManualModeService.setColors(color);
-							}, 200);
+					this.intervalId = setInterval(function() {
+						red = (red + 1) % 512
+						green = (green + 2) % 512;
+						blue = (blue + 3) % 512;
+						var color = {
+							red : red < 256 ? red : 512 - red,
+							green : green < 256 ? green : 512 - green,
+							blue : blue < 256 ? blue : 512 - blue,
+						};
+						ArduinoService.setColors(color);
+					}, 200);
 				} else {
 					console.log("Stopping demo");
 					clearInterval(this.intervalId);
@@ -102,4 +84,6 @@ ledinoControllers.controller('dashboardController', [
 				$scope.demoIsOn = !$scope.demoIsOn;
 
 			}
+
+			$scope.init();
 		} ]);
