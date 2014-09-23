@@ -6,12 +6,13 @@ ledinoServices.service('ArduinoService',[ "WebSocketService","config", function(
 	var init = function() {
 		WebSocketService.connect(function(e) {
 			// onSuccess
-			WebSocketService.subscribe("/topic/ledino-state-changed", function(message) {
+			WebSocketService.subscribe(config.arduinoStateBroadcastUrl, function(message) {
 				console.log("Received new ledino state:'" + message.body + "',executing event handlers");
 				for (var i = 0; i < stateChangeHandlers.length; i++) {
 					stateChangeHandlers[i](JSON.parse(message.body));
 				}
 			});
+			console.log("Subscribed on topic: "+config.arduinoStateBroadcastUrl);
 		});
 	}
 

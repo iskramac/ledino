@@ -34,7 +34,7 @@
 <script>
 	$(document).ready(function() {
 		$.getJSON("/rest/application/configuration", function(data) {
-			console.log("Received bootstrap configuration, starting angular app");
+			console.log("Received bootstrap configuration:\n "+JSON.stringify(data)+"\nStarting angular app...");
 			ledinoApp.value('config',data);
 			angular.bootstrap(document, [ 'ledinoApp' ]);
 		});
