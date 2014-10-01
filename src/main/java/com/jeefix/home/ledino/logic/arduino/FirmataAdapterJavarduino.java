@@ -1,4 +1,4 @@
-package com.jeefix.home.ledino.logic;
+package com.jeefix.home.ledino.logic.arduino;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

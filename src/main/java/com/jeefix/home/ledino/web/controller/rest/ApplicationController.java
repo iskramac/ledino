@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jeefix.home.ledino.common.constant.ApplicationPropertyExpression;
-import com.jeefix.home.ledino.logic.ArduinoService;
-import com.jeefix.home.ledino.model.ApplicationConfiguration;
+import com.jeefix.home.ledino.common.model.web.ApplicationConfiguration;
+import com.jeefix.home.ledino.logic.arduino.ArduinoService;
 
 @Controller
 @RequestMapping("/rest")

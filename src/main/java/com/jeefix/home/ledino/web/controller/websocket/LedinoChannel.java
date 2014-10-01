@@ -6,8 +6,8 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import com.jeefix.home.ledino.logic.ArduinoService;
-import com.jeefix.home.ledino.model.LedColor;
+import com.jeefix.home.ledino.common.model.LedColor;
+import com.jeefix.home.ledino.logic.arduino.ArduinoService;
 
 @Controller
 public class LedinoChannel {

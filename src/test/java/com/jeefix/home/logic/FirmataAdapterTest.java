@@ -1,8 +1,8 @@
 package com.jeefix.home.logic;
 
-import com.jeefix.home.ledino.common.enums.LedChannel;
-import com.jeefix.home.ledino.logic.FirmataAdapter;
-import com.jeefix.home.ledino.logic.FirmataAdapterJavarduino;
+import com.jeefix.home.ledino.common.model.arduino.LedChannel;
+import com.jeefix.home.ledino.logic.arduino.FirmataAdapter;
+import com.jeefix.home.ledino.logic.arduino.FirmataAdapterJavarduino;
 
 public class FirmataAdapterTest {
     

@@ -1,4 +1,4 @@
-package com.jeefix.home.ledino.model;
+package com.jeefix.home.ledino.common.model;
 
 import java.io.Serializable;
 

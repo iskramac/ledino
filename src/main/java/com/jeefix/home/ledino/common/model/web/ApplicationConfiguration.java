@@ -1,6 +1,8 @@
-package com.jeefix.home.ledino.model;
+package com.jeefix.home.ledino.common.model.web;
 
 import java.io.Serializable;
+
+import com.jeefix.home.ledino.common.model.arduino.ArduinoState;
 
 public class ApplicationConfiguration implements Serializable {
     

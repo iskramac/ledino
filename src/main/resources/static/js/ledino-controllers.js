@@ -36,13 +36,13 @@ ledinoControllers.controller('manualModeController', [ '$scope', '$rootScope', '
 			$scope.init();
 		} ]);
 
-ledinoControllers.controller('dashboardController', [ '$scope', 'ArduinoService', 'ColorConverterService', 'LayoutService',
-		function($scope, ArduinoService, ColorConverterService, LayoutService) {
+ledinoControllers.controller('dashboardController', [ '$scope', 'ArduinoService', 'ColorConverterService', 'LayoutService','AnimationService',
+		function($scope, ArduinoService, ColorConverterService, LayoutService,AnimationService) {
 			$scope.init = function() {
 				console.log("Dashboard initialized");
 			}
 			var intervalId = 0;
-			$scope.demoIsOn = false;
+
 			$scope.ledOff = function() {
 				var color = {
 					red : 0,
@@ -59,31 +59,19 @@ ledinoControllers.controller('dashboardController', [ '$scope', 'ArduinoService'
 				};
 				ArduinoService.setColors(color);
 			}
-			$scope.toogleDemo = function() {
-				if ($scope.demoIsOn == false) {
-					console.log("Starting demo");
-					var red = 0;
-					var green = 0;
-					var blue = 0;
-					this.intervalId = setInterval(function() {
-						red = (red + 1) % 512
-						green = (green + 2) % 512;
-						blue = (blue + 3) % 512;
-						var color = {
-							red : red < 256 ? red : 512 - red,
-							green : green < 256 ? green : 512 - green,
-							blue : blue < 256 ? blue : 512 - blue,
-						};
-						ArduinoService.setColors(color);
-					}, 200);
-				} else {
-					console.log("Stopping demo");
-					clearInterval(this.intervalId);
-				}
-
-				$scope.demoIsOn = !$scope.demoIsOn;
-
+			$scope.discoAnimation = function(){
+				AnimationService.startAnimation("disco");	
 			}
+			$scope.fadeInAnimation = function(){
+				AnimationService.startAnimation("fadeIn");	
+			}
+			$scope.fadeOutAnimation = function(){
+				AnimationService.startAnimation("fadeOut");	
+			}
+			$scope.stopAllAnimations = function(){
+				AnimationService.stopAllAnimations();
+			}
+			
 
 			$scope.init();
 		} ]);

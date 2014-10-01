@@ -1,4 +1,4 @@
-package com.jeefix.home.ledino.logic;
+package com.jeefix.home.ledino.logic.arduino;
 
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -12,12 +12,12 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import com.jeefix.home.ledino.common.constant.ApplicationPropertyExpression;
-import com.jeefix.home.ledino.common.enums.ArduinoMode;
-import com.jeefix.home.ledino.common.enums.LedChannel;
 import com.jeefix.home.ledino.common.helper.ColorHelper;
 import com.jeefix.home.ledino.common.helper.ObjectCloner;
-import com.jeefix.home.ledino.model.ArduinoState;
-import com.jeefix.home.ledino.model.LedColor;
+import com.jeefix.home.ledino.common.model.LedColor;
+import com.jeefix.home.ledino.common.model.arduino.ArduinoMode;
+import com.jeefix.home.ledino.common.model.arduino.ArduinoState;
+import com.jeefix.home.ledino.common.model.arduino.LedChannel;
 
 @Service
 @Scope("singleton")

@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jeefix.home.ledino.common.enums.LedChannel;
 import com.jeefix.home.ledino.common.helper.ColorHelper;
-import com.jeefix.home.ledino.logic.ArduinoService;
-import com.jeefix.home.ledino.model.ArduinoState;
-import com.jeefix.home.ledino.model.LedColor;
+import com.jeefix.home.ledino.common.model.LedColor;
+import com.jeefix.home.ledino.common.model.arduino.ArduinoState;
+import com.jeefix.home.ledino.common.model.arduino.LedChannel;
+import com.jeefix.home.ledino.logic.arduino.ArduinoService;
 
 @Controller
 @RequestMapping("/rest/arduino")

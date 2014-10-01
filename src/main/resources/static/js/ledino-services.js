@@ -92,3 +92,14 @@ ledinoServices.service('RestService', [ "$resource", function($resource) {
 		}
 	}
 } ]);
+
+ledinoServices.service('AnimationService', [ "$resource", function($resource) {
+	return {
+		startAnimation : function(name,callback) {
+			return $resource('/rest/animation/'+name+'/start').get(callback);
+		},
+		stopAllAnimations : function(callback) {
+			return $resource('/rest/animation/stop').get(callback);
+		}
+	}
+} ]);

@@ -1,17 +1,17 @@
-package com.jeefix.home.ledino.logic;
+package com.jeefix.home.ledino.logic.arduino;
 
 import static com.jeefix.home.ledino.common.constant.ApplicationPropertyExpression.*;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.jeefix.home.ledino.common.enums.LedChannel;
 import com.jeefix.home.ledino.common.exception.LedinoRuntimeException;
+import com.jeefix.home.ledino.common.model.arduino.LedChannel;
 
 public abstract class FirmataAdapter {
     
     private static final Logger log = Logger.getLogger(FirmataAdapter.class);
-    @Value(ARDUINO_PIN_BLUE)
+    @Value(ARDUINO_PIN_RED)
     private int redPinValue;
     @Value(ARDUINO_PIN_GREEN)
     private int greenPinValue;

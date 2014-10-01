@@ -16,7 +16,7 @@
 		</layout>
 	</appender>
 	<logger name="com.jeefix">
-		<level value="ALL" />
+		<level value="INFO" />
 		<appender-ref ref="ledino-file" />
 	</logger>
 	<logger name="org.springframework">
