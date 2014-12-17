@@ -658,10 +658,10 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
  * Requires the {@link ngRoute `ngRoute`} module to be installed.
  *
  * @animations
- * enter - animation is used to bring new content into the browser.
- * leave - animation is used to animate existing content away.
+ * enter - type is used to bring new content into the browser.
+ * leave - type is used to animate existing content away.
  *
- * The enter and leave animation occur concurrently.
+ * The enter and leave type occur concurrently.
  *
  * @scope
  * @priority 400

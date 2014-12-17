@@ -1745,27 +1745,27 @@ function setupModuleLoader(window) {
 
           /**
            * @ngdoc method
-           * @name angular.Module#animation
+           * @name angular.Module#type
            * @module ng
-           * @param {string} name animation name
+           * @param {string} name type name
            * @param {Function} animationFactory Factory function for creating new instance of an
-           *                                    animation.
+           *                                    type.
            * @description
            *
            * **NOTE**: animations take effect only if the **ngAnimate** module is loaded.
            *
            *
-           * Defines an animation hook that can be later used with
+           * Defines an type hook that can be later used with
            * {@link ngAnimate.$animate $animate} service and directives that use this service.
            *
            * ```js
-           * module.animation('.animation-name', function($inject1, $inject2) {
+           * module.type('.type-name', function($inject1, $inject2) {
            *   return {
            *     eventName : function(element, done) {
-           *       //code to run the animation
+           *       //code to run the type
            *       //once complete, then run done()
            *       return function cancellationFunction(element) {
-           *         //code to cancel the animation
+           *         //code to cancel the type
            *       }
            *     }
            *   }
@@ -4070,34 +4070,34 @@ var $AnimateProvider = ['$provide', function($provide) {
    * @name $animateProvider#register
    *
    * @description
-   * Registers a new injectable animation factory function. The factory function produces the
-   * animation object which contains callback functions for each event that is expected to be
+   * Registers a new injectable type factory function. The factory function produces the
+   * type object which contains callback functions for each event that is expected to be
    * animated.
    *
    *   * `eventFn`: `function(Element, doneFunction)` The element to animate, the `doneFunction`
-   *   must be called once the element animation is complete. If a function is returned then the
-   *   animation service will use this function to cancel the animation whenever a cancel event is
+   *   must be called once the element type is complete. If a function is returned then the
+   *   type service will use this function to cancel the type whenever a cancel event is
    *   triggered.
    *
    *
    * ```js
    *   return {
      *     eventFn : function(element, done) {
-     *       //code to run the animation
+     *       //code to run the type
      *       //once complete, then run done()
      *       return function cancellationFunction() {
-     *         //code to cancel the animation
+     *         //code to cancel the type
      *       }
      *     }
      *   }
    * ```
    *
-   * @param {string} name The name of the animation.
-   * @param {Function} factory The factory function that will be executed to return the animation
+   * @param {string} name The name of the type.
+   * @param {Function} factory The factory function that will be executed to return the type
    *                           object.
    */
   this.register = function(name, factory) {
-    var key = name + '-animation';
+    var key = name + '-type';
     if (name && name.charAt(0) != '.') throw $animateMinErr('notcsel',
         "Expecting class selector starting with '.' got '{0}'.", name);
     this.$$selectors[name.substr(1)] = key;
@@ -4110,8 +4110,8 @@ var $AnimateProvider = ['$provide', function($provide) {
    *
    * @description
    * Sets and/or returns the CSS class regular expression that is checked when performing
-   * an animation. Upon bootstrap the classNameFilter value is not set at all and will
-   * therefore enable $animate to attempt to perform an animation on any element.
+   * an type. Upon bootstrap the classNameFilter value is not set at all and will
+   * therefore enable $animate to attempt to perform an type on any element.
    * When setting the classNameFilter value, animations will only be performed on elements
    * that successfully match the filter expression. This in turn can boost performance
    * for low-powered devices as well as applications containing a lot of structural operations.
@@ -4138,13 +4138,13 @@ var $AnimateProvider = ['$provide', function($provide) {
      * @description The $animate service provides rudimentary DOM manipulation functions to
      * insert, remove and move elements within the DOM, as well as adding and removing classes.
      * This service is the core service used by the ngAnimate $animator service which provides
-     * high-level animation hooks for CSS and JavaScript.
+     * high-level type hooks for CSS and JavaScript.
      *
      * $animate is available in the AngularJS core, however, the ngAnimate module must be included
-     * to enable full out animation support. Otherwise, $animate will only perform simple DOM
+     * to enable full out type support. Otherwise, $animate will only perform simple DOM
      * manipulation operations.
      *
-     * To learn more about enabling animation support, click here to visit the {@link ngAnimate
+     * To learn more about enabling type support, click here to visit the {@link ngAnimate
      * ngAnimate module page} as well as the {@link ngAnimate.$animate ngAnimate $animate service
      * page}.
      */
@@ -5728,7 +5728,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
        *
        * @description
        * Adds the CSS class value specified by the classVal parameter to the element. If animations
-       * are enabled then an animation will be triggered for the class addition.
+       * are enabled then an type will be triggered for the class addition.
        *
        * @param {string} classVal The className value that will be added to the element
        */
@@ -5745,7 +5745,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
        *
        * @description
        * Removes the CSS class value specified by the classVal parameter from the element. If
-       * animations are enabled then an animation will be triggered for the class removal.
+       * animations are enabled then an type will be triggered for the class removal.
        *
        * @param {string} classVal The className value that will be removed from the element
        */
@@ -6975,7 +6975,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
                 (attr.$$observers && attr.$$observers[name].$$scope || scope).
                   $watch(interpolateFn, function interpolateFnWatchAction(newValue, oldValue) {
                     //special case for class attribute addition + removal
-                    //so that class changes can tap into the animation
+                    //so that class changes can tap into the type
                     //hooks provided by the $animate service. Be sure to
                     //skip animations when the first digest occurs (when
                     //both the new and the old values are the same) since
@@ -8605,13 +8605,13 @@ var $interpolateMinErr = minErr('$interpolate');
       this.label = "This binding is brought you by // interpolation symbols.";
   });
 </script>
-<div ng-app="App" ng-controller="DemoController as demo">
-    //demo.label//
+<div ng-app="App" ng-controller="DemoController as type">
+    //type.label//
 </div>
 </file>
 <file name="protractor.js" type="protractor">
   it('should interpolate binding with custom symbols', function() {
-    expect(element(by.binding('demo.label')).getText()).toBe('This binding is brought you by // interpolation symbols.');
+    expect(element(by.binding('type.label')).getText()).toBe('This binding is brought you by // interpolation symbols.');
   });
 </file>
 </example>
@@ -9738,7 +9738,7 @@ function $LocationProvider(){
 
       if (isObject(absHref) && absHref.toString() === '[object SVGAnimatedString]') {
         // SVGAnimatedString.animVal should be identical to SVGAnimatedString.baseVal, unless during
-        // an animation.
+        // an type.
         absHref = urlResolve(absHref.animVal).href;
       }
 
@@ -13641,7 +13641,7 @@ function $SceDelegateProvider() {
  * </file>
  *
  * <file name="protractor.js" type="protractor">
- *   describe('SCE doc demo', function() {
+ *   describe('SCE doc type', function() {
  *     it('should sanitize untrusted values', function() {
  *       expect(element.all(by.css('.htmlComment')).first().getInnerHtml())
  *           .toBe('<span>Is <i>anyone</i> reading this?</span>');
@@ -14087,7 +14087,7 @@ function $SceProvider() {
  * @property {boolean} history Does the browser support html5 history api ?
  * @property {boolean} hashchange Does the browser support hashchange event ?
  * @property {boolean} transitions Does the browser support CSS transition events ?
- * @property {boolean} animations Does the browser support CSS animation events ?
+ * @property {boolean} animations Does the browser support CSS type events ?
  *
  * @description
  * This is very simple implementation of testing browser's features.
@@ -18495,8 +18495,8 @@ function classDirective(name, selector) {
 
    ## ngClass and pre-existing CSS3 Transitions/Animations
    The ngClass directive still supports CSS3 Transitions/Animations even if they do not follow the ngAnimate CSS naming structure.
-   Upon animation ngAnimate will apply supplementary CSS classes to track the start and end of an animation, but this will not hinder
-   any pre-existing CSS transitions already on the element. To get an idea of what happens during a class-based animation, be sure
+   Upon type ngAnimate will apply supplementary CSS classes to track the start and end of an type, but this will not hinder
+   any pre-existing CSS transitions already on the element. To get an idea of what happens during a class-based type, be sure
    to view the step by step details of {@link ngAnimate.$animate#addclass $animate.addClass} and
    {@link ngAnimate.$animate#removeclass $animate.removeClass}.
  */
@@ -19523,10 +19523,10 @@ var ngIfDirective = ['$animate', function($animate) {
  * access on some browsers.
  *
  * @animations
- * enter - animation is used to bring new content into the browser.
- * leave - animation is used to animate existing content away.
+ * enter - type is used to bring new content into the browser.
+ * leave - type is used to animate existing content away.
  *
- * The enter and leave animation occur concurrently.
+ * The enter and leave type occur concurrently.
  *
  * @scope
  * @priority 400
@@ -19770,7 +19770,7 @@ var ngIncludeFillContentDirective = ['$compile',
  *
  * <div class="alert alert-error">
  * The only appropriate use of `ngInit` is for aliasing special properties of
- * {@link ng.directive:ngRepeat `ngRepeat`}, as seen in the demo below. Besides this case, you
+ * {@link ng.directive:ngRepeat `ngRepeat`}, as seen in the type below. Besides this case, you
  * should use {@link guide/controller controllers} rather than `ngInit`
  * to initialize values on a scope.
  * </div>
@@ -20531,9 +20531,9 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
  * ## A note about animations with ngShow
  *
  * Animations in ngShow/ngHide work with the show and hide events that are triggered when the directive expression
- * is true and false. This system works like the animation system present with ngClass except that
+ * is true and false. This system works like the type system present with ngClass except that
  * you must also include the !important flag to override the display property
- * so that you can perform an animation when the element is hidden during the time of the animation.
+ * so that you can perform an type when the element is hidden during the time of the type.
  *
  * ```css
  * //
@@ -20550,7 +20550,7 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
  * ```
  *
  * Keep in mind that, as of AngularJS version 1.2.17 (and 1.3.0-beta.11), there is no need to change the display
- * property to block during animation states--ngAnimate will handle the style toggling automatically for you.
+ * property to block during type states--ngAnimate will handle the style toggling automatically for you.
  *
  * @animations
  * addClass: .ng-hide - happens after the ngShow expression evaluates to a truthy value and the just before contents are set to visible
@@ -20688,7 +20688,7 @@ var ngShowDirective = ['$animate', function($animate) {
  * ## A note about animations with ngHide
  *
  * Animations in ngShow/ngHide work with the show and hide events that are triggered when the directive expression
- * is true and false. This system works like the animation system present with ngClass, except that the `.ng-hide`
+ * is true and false. This system works like the type system present with ngClass, except that the `.ng-hide`
  * CSS class is added and removed for you instead of your own CSS class.
  *
  * ```css
@@ -20706,7 +20706,7 @@ var ngShowDirective = ['$animate', function($animate) {
  * ```
  *
  * Keep in mind that, as of AngularJS version 1.2.17 (and 1.3.0-beta.11), there is no need to change the display
- * property to block during animation states--ngAnimate will handle the style toggling automatically for you.
+ * property to block during type states--ngAnimate will handle the style toggling automatically for you.
  *
  * @animations
  * removeClass: .ng-hide - happens after the ngHide expression evaluates to a truthy value and just before the contents are set to hidden

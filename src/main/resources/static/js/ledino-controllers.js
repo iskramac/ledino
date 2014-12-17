@@ -6,15 +6,15 @@ ledinoControllers.controller('menuController', function($scope) {
 		url : "#/dashboard"
 	}, {
 		name : "Manual mode",
-		url : "#/mode/manual"
+		url : "#/manual-mode"
 	}, {
 		name : "Scheduler mode",
-		url : "#/mode/scheduler"
+		url : "#/scheduler-mode"
 	}, ];
 });
 
-ledinoControllers.controller('pageController', [ '$rootScope', 'RestService', '$http', 'ArduinoService', 'ColorConverterService', 'LayoutService',
-		'WebSocketService', 'config', function($rootScope, RestService, $http, ArduinoService, ColorConverterService, LayoutService, WebSocketService, config) {
+ledinoControllers.controller('pageController', [ '$rootScope', '$http', 'ArduinoService', 'ColorConverterService', 'LayoutService',
+		'WebSocketService', 'config', function($rootScope, $http, ArduinoService, ColorConverterService, LayoutService, WebSocketService, config) {
 
 			LayoutService.setPageColor(config.arduinoState.ledColor);
 			ArduinoService.addStateChangeHandler(function(state) {
@@ -35,6 +35,18 @@ ledinoControllers.controller('manualModeController', [ '$scope', '$rootScope', '
 			}
 			$scope.init();
 		} ]);
+
+
+ledinoControllers.controller('schedulerModeController', [ '$scope', function($scope) {
+		$scope.init = function() {
+
+			console.log("Scheduler mode initialized");
+		};
+
+
+		$scope.init();
+	} ]);
+
 
 ledinoControllers.controller('dashboardController', [ '$scope', 'ArduinoService', 'ColorConverterService', 'LayoutService','AnimationService',
 		function($scope, ArduinoService, ColorConverterService, LayoutService,AnimationService) {

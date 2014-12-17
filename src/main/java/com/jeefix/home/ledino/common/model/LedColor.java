@@ -43,6 +43,28 @@ public class LedColor implements Serializable {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    LedColor ledColor = (LedColor) o;
+
+    if (blue != ledColor.blue) return false;
+    if (green != ledColor.green) return false;
+    if (red != ledColor.red) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = red;
+    result = 31 * result + green;
+    result = 31 * result + blue;
+    return result;
+  }
+
+  @Override
   public String toString() {
     return "LedColor [red=" + red + ", green=" + green + ", blue=" + blue + "]";
   }

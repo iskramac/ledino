@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
-import com.jeefix.home.ledino.common.constant.ApplicationPropertyExpression;
+import com.jeefix.home.ledino.common.constant.ApplicationProperties;
 import com.jeefix.home.ledino.common.helper.ColorHelper;
 import com.jeefix.home.ledino.common.helper.ObjectCloner;
 import com.jeefix.home.ledino.common.model.LedColor;
@@ -23,7 +23,7 @@ import com.jeefix.home.ledino.common.model.arduino.LedChannel;
 @Scope("singleton")
 public class ArduinoService {
     
-    @Value(ApplicationPropertyExpression.APP_WEBSOCKET_CHANNEL_STATE_CHANGE_URL)
+    @Value(ApplicationProperties.APP_WEBSOCKET_CHANNEL_STATE_CHANGE_URL)
     private String ledinoStateChangeTopic;
     
     @Autowired

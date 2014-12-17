@@ -1,6 +1,6 @@
 package com.jeefix.home.ledino.logic.arduino;
 
-import static com.jeefix.home.ledino.common.constant.ApplicationPropertyExpression.*;
+import static com.jeefix.home.ledino.common.constant.ApplicationProperties.*;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +35,7 @@ public abstract class FirmataAdapter {
     
     public void setLedLevel(LedChannel color, int level) {
         if (isUseMock()) {
-            log.info("Ledino is in MOCK mode, changes has not been applied");
+            log.trace("Ledino is in MOCK mode, changes has not been applied");
             return;
         }
         int pinNumber = getLedPinNumber(color);

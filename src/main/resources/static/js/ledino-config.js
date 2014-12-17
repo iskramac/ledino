@@ -5,10 +5,14 @@ ledinoApp.config([ '$routeProvider', function($routeProvider) {
 		title : 'Ledino::Dashboard',
 		templateUrl : '/html/pages/dashboard.html',
 		controller : 'dashboardController'
-	}).when('/mode/manual', {
+	}).when('/manual-mode', {
 		title : 'Ledino::Manual mode',
 		templateUrl : '/html/pages/manual-mode.html',
 		controller : 'manualModeController'
+	}).when('/scheduler-mode', {
+		title : 'Ledino::Scheduler mode',
+		templateUrl : '/html/pages/scheduler-mode.html',
+		controller : 'schedulerModeController'
 	}).otherwise({
 		redirectTo : '/dashboard'
 	});
@@ -18,5 +22,4 @@ ledinoApp.run([ '$location', '$rootScope', function($location, $rootScope) {
 	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
 		$rootScope.title = current.$$route.title;
 	});
-
 } ]);
