@@ -1,4 +1,4 @@
-package com.jeefix.home.ledino.web.configuration;
+package com.jeefix.home.ledino.configuration.module;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
+public class WebSocket implements WebSocketMessageBrokerConfigurer {
 
   @Override
   public void registerStompEndpoints(StompEndpointRegistry registry) {

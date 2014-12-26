@@ -15,7 +15,7 @@ public class FirmataAdapterTest {
         adapter.setArduinoPortName(PORT_NAME);
         adapter.setUseMock(false);
         System.out.println("AAAA");
-        adapter.init();
+//        adapter.init();
         System.out.println("STOP");
         adapter.setLedLevel(LedChannel.RED, 255);
         Thread.sleep(300);

@@ -1,7 +1,9 @@
 package com.jeefix.home.ledino.web.controller.rest;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import com.jeefix.home.ledino.common.helper.PropertiesHelper;
 import com.jeefix.home.ledino.web.controller.rest.model.ResponseStatus;
 import com.jeefix.home.ledino.web.controller.rest.model.ResponseWrapper;
 import org.apache.log4j.Logger;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jeefix.home.ledino.common.constant.ApplicationProperties;
+import com.jeefix.home.ledino.common.constant.ApplicationProperty;
 import com.jeefix.home.ledino.common.model.web.ApplicationConfiguration;
 import com.jeefix.home.ledino.logic.arduino.ArduinoService;
 
@@ -23,8 +25,15 @@ public class ApplicationController {
     
     @Autowired
     private ArduinoService arduinoService;
-    @Value(ApplicationProperties.APP_WEBSOCKET_CHANNEL_STATE_CHANGE_URL)
+
+    @Autowired
+    private PropertiesHelper propertiesHelper;
     private String arduinoStateBroadcastUrl;
+
+    @PostConstruct
+    public void init(){
+        arduinoStateBroadcastUrl = propertiesHelper.getProperty(ApplicationProperty.APP_WEBSOCKET_CHANNEL_STATE_CHANGE_URL);
+    }
     
     @RequestMapping("/application/configuration")
     @ResponseBody

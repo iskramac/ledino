@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: com.jeefix.home.ledino.web.configuration.SpringBootConfiguration
+Main-Class: com.jeefix.home.ledino.configuration.SpringBootConfiguration

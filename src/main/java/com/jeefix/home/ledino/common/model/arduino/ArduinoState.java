@@ -10,21 +10,16 @@ public class ArduinoState implements Serializable {
     
     private ArduinoMode arduinoMode;
     private LedColor ledColor;
-    
+
+    public ArduinoState(ArduinoMode arduinoMode, LedColor ledColor) {
+        this.arduinoMode = arduinoMode;
+        this.ledColor = ledColor;
+    }
+
     public ArduinoMode getArduinoMode() {
         return arduinoMode;
     }
-    
-    public void setArduinoMode(ArduinoMode arduinoMode) {
-        this.arduinoMode = arduinoMode;
-    }
-    
     public LedColor getLedColor() {
         return ledColor;
     }
-    
-    public void setLedColor(LedColor ledColor) {
-        this.ledColor = ledColor;
-    }
-    
 }

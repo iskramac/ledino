@@ -1,4 +1,4 @@
-package com.jeefix.home.ledino.web.configuration;
+package com.jeefix.home.ledino.configuration;
 
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.Calendar;
@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.scheduling.TaskScheduler;
@@ -26,6 +27,7 @@ public class SpringAfterStartupConfiguration implements ApplicationListener<Cont
     private AnimationService animationService;
     
     @Autowired
+    @Qualifier("taskScheduler")
     private TaskScheduler scheduler;
     
     @Override
