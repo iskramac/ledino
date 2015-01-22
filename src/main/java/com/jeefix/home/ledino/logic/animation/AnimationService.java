@@ -15,7 +15,7 @@ import java.util.Map;
 
 
 /**
- * This class is reponsible for handling animations
+ * This class is responsible for handling animations
  */
 @Service
 public class AnimationService {

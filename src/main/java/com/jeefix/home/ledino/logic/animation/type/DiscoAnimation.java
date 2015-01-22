@@ -8,19 +8,19 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DiscoAnimation extends AnimationBase {
-
+    
     public static final String ANIMATION_NAME = "Disco";
-
+    
     private int internalIndex = 0;
-
+    
     @Autowired
     private ArduinoService arduinoService;
-
+    
     @Override
     public String getName() {
         return ANIMATION_NAME;
     }
-
+    
     @Override
     public LedColor updateColor(LedColor current) {
         internalIndex = (++internalIndex) % 3 + 1;
@@ -28,13 +28,13 @@ public class DiscoAnimation extends AnimationBase {
         color.setBlue(internalIndex == 1 ? 255 : 0);
         color.setRed(internalIndex == 2 ? 255 : 0);
         color.setGreen(internalIndex == 3 ? 255 : 0);
-
+        
         try {
-            Thread.sleep(250);//TODO do propsów
+            Thread.sleep(250);// TODO do propsów
         } catch (InterruptedException e) {
             throw new LedinoRuntimeException("Thread sleep has been interupted");
         }
         return color;
     }
-
+    
 }
